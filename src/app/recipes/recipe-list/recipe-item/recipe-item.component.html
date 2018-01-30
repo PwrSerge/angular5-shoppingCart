@@ -1,0 +1,13 @@
+<a 
+  style="cursor: pointer;"
+  class="list-group-item d-flex"
+(click)="onSelected()">
+  <div class="col-10 order-1 ">
+    <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
+    <p class="list-group-item-text">{{ recipe.description }}</p>
+  </div>
+  <div class="col-2 order-2 d-flex justify-content-end ">
+    <img [src]="recipe.imagePath" alt="{{ recipe.name }}" class="img-responsive" style="max-height: 50px">
+  </div>
+</a>
+
