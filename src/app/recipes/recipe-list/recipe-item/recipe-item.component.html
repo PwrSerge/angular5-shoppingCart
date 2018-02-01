@@ -1,7 +1,9 @@
 <a 
   style="cursor: pointer;"
-  class="list-group-item d-flex"
-(click)="onSelected()">
+  [routerLink]="[index]"
+  routerLinkActive="active"
+  class="list-group-item d-flex "
+  >
   <div class="col-10 order-1 ">
     <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
     <p class="list-group-item-text">{{ recipe.description }}</p>
