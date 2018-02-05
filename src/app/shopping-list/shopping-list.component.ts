@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { Ingredient } from '../common/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 
-
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -18,7 +17,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.ingredients = this.slService.getIngredients();
-    this.slService.ingredientsChanged
+    this.subscription = this.slService.ingredientsChanged
       .subscribe(
       (ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
@@ -27,7 +26,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(index: number) {
-  this.slService.startedEditing.next(index);
+    this.slService.startedEditing.next(index);
   }
 
   ngOnDestroy() {
