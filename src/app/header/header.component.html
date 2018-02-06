@@ -2,7 +2,7 @@
 
 
   <div class="navbar-header">
-    <a class="nav-link" routerLink="/"  class="navbar-brand">Recipe Book</a>
+    <a class="nav-link" routerLink="/" class="navbar-brand">Recipe Book</a>
   </div>
 
   <div class="collapse navbar-collapse">
@@ -15,8 +15,18 @@
       </li>
     </ul>
     <ul class="navbar-nav flex-row ml-sm-auto  d-md-flex">
-      <li><a routerLink="/signup"  class="nav-link">Sign Up</a></li>
-      <li class="nav-item dropdown " appDropdown>
+      <ng-template [ngIf]="!authService.isAuthenticated()">
+        <li>
+          <a routerLink="/signup" class="nav-link" style="cursor: pointer">Register</a>
+        </li>
+        <li>
+          <a routerLink="/signin" class="nav-link" style="cursor: pointer">Login</a>
+        </li>
+      </ng-template>
+      <li>
+        <a  class="nav-link" style="cursor: pointer" (click)="onLogout()" *ngIf="authService.isAuthenticated()">Logout</a>
+      </li>
+      <li class="nav-item dropdown " appDropdown *ngIf="authService.isAuthenticated()">
         <a class="nav-item nav-link dropdown-toggle  mr-sm-4" id="bd-versions" (click)="showMenu = !showMenu" style="cursor: pointer">
           Manage
         </a>
