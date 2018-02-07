@@ -39,5 +39,9 @@ export class HeaderComponent {
     onFetchData() {
         this.dataStorageService.getRecipes();
     }
+    
+    isAuthenticated() {
+        return this.authService.isAuthenticated();
+    }
 
 }
