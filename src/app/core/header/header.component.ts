@@ -16,12 +16,8 @@ export class HeaderComponent {
     constructor(private dataStorageService: DataStorageService,
         private authService: AuthService) { }
 
-    setDropdownMenu() {
-        if (this.showMenu) {
-            return 'show';
-        } else {
-            return '';
-        }
+  ngOnInit() {
+    this.authState = this.store.select('auth');
     }
 
     onSaveData() {
