@@ -1,23 +1,28 @@
-import { Component } from '@angular/core/';
-/* import { HttpEvent } from '@angular/common/http'; */
+import { Component, OnInit } from '@angular/core';
+// import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { DataStorageService } from '../../common/data-storage.service';
-import { AuthService } from '../../auth/auth.service';
-
-
+import * as fromApp from '../../store/app.reducers';
+import * as fromAuth from '../../auth/store/auth.reducers';
+import * as AuthActions from '../../auth/store/auth.actions';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html'
 })
-export class HeaderComponent {
+
+export class HeaderComponent implements OnInit {
+    authState: Observable<fromAuth.State>;
     showMenu = false;
 
     constructor(private dataStorageService: DataStorageService,
-        private authService: AuthService) { }
+        private store: Store<fromApp.AppState>) {
+    }
 
-  ngOnInit() {
-    this.authState = this.store.select('auth');
+    ngOnInit() {
+        this.authState = this.store.select('auth');
     }
 
     onSaveData() {
@@ -28,16 +33,21 @@ export class HeaderComponent {
             }
             );
     }
-    onLogout() {
-        this.authService.logout();
-
+    setDropdownMenu() {
+        if (this.showMenu) {
+            return 'show';
+        } else {
+            return '';
+        }
     }
+
     onFetchData() {
         this.dataStorageService.getRecipes();
     }
-    
-    isAuthenticated() {
-        return this.authService.isAuthenticated();
-    }
 
+    onLogout() {
+        this.store.dispatch(new AuthActions.Logout());
+    }
 }
+
+
