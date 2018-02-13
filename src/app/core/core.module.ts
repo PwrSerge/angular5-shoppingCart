@@ -5,8 +5,6 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../common/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
-import { DataStorageService } from '../common/data-storage.service';
-import { RecipeService } from '../recipes/recipe.service';
 import { AuthInterceptor } from '../common/auth.interceptor';
 import { LoggingInterceptor } from '../common/logging.interceptor';
 
@@ -24,8 +22,6 @@ import { LoggingInterceptor } from '../common/logging.interceptor';
     HeaderComponent
   ],
   providers: [
-    RecipeService,
-    DataStorageService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
   ]
